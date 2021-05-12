@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AssemblyName>CcAcca.LogDimensionCollection.AppInsights</AssemblyName>
+    <RootNamespace>CcAcca.LogDimensionCollection.AppInsights</RootNamespace>
+    <Version>1.0.0</Version>
+    <Description>Enrich MS Application Insight telemetry with collected log dimensions</Description>
+    <PackageTags>Analytics Azure ApplicationInsights Telemetry Monitoring Logging</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.14.0" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,54 @@
+# Assumes you have defined the following variables in the azure devops project:
+# - BuildConfiguration (default value Release)
+# - Nuget.ApiKey
+
+name: $(BuildID)
+resources:
+  - repo: self
+    clean: "true"
+
+trigger:
+  - master
+
+stages:
+  - stage: Build
+    displayName: Build image
+    jobs:
+      - job: Build
+        displayName: Build
+        pool:
+         vmImage: 'ubuntu-latest'
+        steps:
+
+          - task: DotNetCoreCLI@2
+            displayName: Restore
+            inputs:
+              command: restore
+              feedsToUse: config
+              nugetConfigPath: NuGet.config
+
+          - task: DotNetCoreCLI@2
+            displayName: Build
+            inputs:
+              arguments: '--configuration $(BuildConfiguration) --no-restore'
+
+          - task: DotNetCoreCLI@2
+            displayName: Unit Test
+            inputs:
+              command: test
+              arguments: '--configuration $(BuildConfiguration)'
+
+          - task: DotNetCoreCLI@2
+            displayName: Pack
+            inputs:
+              command: pack
+              nobuild: true
+              configuration: '$(BuildConfiguration)'
+
+          - task: NuGetInstaller@0
+            displayName: 'Install Nuget.exe'
+            condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+
+          - script: nuget push $(Build.ArtifactStagingDirectory)\**\*.nupkg -Source https://api.nuget.org/v3/index.json -ApiKey $(Nuget.ApiKey) -SkipDuplicate -NoSymbols
+            displayName: Push to Nuget
+            condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))

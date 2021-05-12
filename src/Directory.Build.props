@@ -1,0 +1,26 @@
+<Project>
+  <PropertyGroup>
+    <Authors>Christian Crowhurst</Authors>
+    <Owners>christianacca</Owners>
+    <RepositoryUrl>https://github.com/christianacca/LogDimensionCollection</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageProjectUrl>https://github.com/christianacca/LogDimensionCollection</PackageProjectUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageIconUrl>https://www.gravatar.com/avatar/c1fc9a95deec0da0a3dc0fac34bddfec.png</PackageIconUrl>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);CS1701;CS1702;CS1591</NoWarn>
+    <LangVersion>9.0</LangVersion>
+<!--    <EmbedUntrackedSources>true</EmbedUntrackedSources>-->
+<!--    <IncludeSymbols>true</IncludeSymbols>-->
+<!--    <SymbolPackageFormat>snupkg</SymbolPackageFormat>-->
+  </PropertyGroup>
+
+<!--
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+-->
+</Project>
