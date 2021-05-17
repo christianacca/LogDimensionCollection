@@ -20,6 +20,8 @@ namespace CcAcca.LogDimensionCollection.AppInsights
         protected override void OnInitializeTelemetry(HttpContext platformContext, RequestTelemetry requestTelemetry,
             ITelemetry telemetry)
         {
+            if (platformContext.Request == null) return;
+
             var options = Options.CurrentValue;
             var httpContext = platformContext.Request.HttpContext;
             var hasEntries = httpContext.Items.TryGetValue(options.HttpContextItemKey, out var entries);
