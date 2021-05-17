@@ -187,7 +187,7 @@ public class CustomActionDimensionCollector : ActionDimensionCollector
     {
     }
 
-    protected override void DoCollectDimensions(IDictionary<string, object> dimensions, string dimensionPrefix)
+    protected override void DoCollectDimensions(IEnumerable<KeyValuePair<string, object>>, string dimensionPrefix)
     {
         foreach (var (key, value) in dimensions.HasKey().PrefixKey(dimensionPrefix))
         {

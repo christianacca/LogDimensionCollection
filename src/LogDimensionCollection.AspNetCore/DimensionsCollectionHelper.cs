@@ -33,12 +33,10 @@ namespace CcAcca.LogDimensionCollection.AspNetCore
 
             if (items == null) return;
 
-            serializer ??= SerializeValue;
-
             var serializedDimensions = items
                 .HasKey()
                 .PrefixKey(dimensionPrefix)
-                .Select(x => new KeyValuePair<string, string>(x.Key, serializer(x.Value)));
+                .SerializeDimension(serializer ?? SerializeValue);
 
             // materialize ALL dimensions so that any exception leaves the original list unaltered
             var materializedDimensions = serializedDimensions.ToList();
@@ -76,6 +74,15 @@ namespace CcAcca.LogDimensionCollection.AspNetCore
                     : $"{dimensionPrefix}{dimensionKey}";
                 return new KeyValuePair<string, object>(key, value);
             });
+        }
+
+        /// <summary>
+        ///     Serialize dimension values
+        /// </summary>
+        public static IEnumerable<KeyValuePair<string, string>> SerializeDimension(
+            this IEnumerable<KeyValuePair<string, object>> source, Func<object, string> serializer)
+        {
+            return source.Select(x => new KeyValuePair<string, string>(x.Key, serializer(x.Value)));
         }
 
         /// <summary>
