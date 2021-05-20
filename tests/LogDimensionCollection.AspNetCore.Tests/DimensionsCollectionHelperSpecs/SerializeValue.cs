@@ -1,11 +1,15 @@
 using System;
 using System.Collections.Generic;
+using System.Text.Json;
 using CcAcca.LogDimensionCollection.AspNetCore;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Xunit;
+using SystemJsonSerializer = System.Text.Json.JsonSerializer;
 
-namespace Specs.ActionDimensionCollectorSpecs
+namespace Specs.DimensionsCollectionHelperSpecs
 {
     public class SerializeValue
     {
@@ -133,6 +137,39 @@ namespace Specs.ActionDimensionCollectorSpecs
             const string expected = "{\"Prop1\":\"one\",\"Prop2\":2}";
             DimensionsCollectionHelper.SerializeValue(value).Should().Be(expected);
         }
+
+        [Fact]
+        public void JObject_value()
+        {
+            const string json = "{\"Prop1\":\"one\",\"Prop2\":2}";
+            var jo = JsonConvert.DeserializeObject<JObject>(json);
+            DimensionsCollectionHelper.SerializeValue(jo).Should().Be(json);
+        }
+
+        [Fact]
+        public void JArray_value()
+        {
+            const string json = "[\"one\",\"two\"]";
+            var ja = JsonConvert.DeserializeObject<JArray>(json);
+            DimensionsCollectionHelper.SerializeValue(ja).Should().Be(json);
+        }
+
+        [Fact]
+        public void JsonElement_Object_value()
+        {
+            const string json = "{\"Prop1\":\"one\",\"Prop2\":2}";
+            var je = SystemJsonSerializer.Deserialize<JsonElement>(json);
+            DimensionsCollectionHelper.SerializeValue(je).Should().Be(json);
+        }
+
+        [Fact]
+        public void JsonElement_Array_value()
+        {
+            const string json = "[\"one\",\"two\"]";
+            var je = SystemJsonSerializer.Deserialize<JsonElement>(json);
+            DimensionsCollectionHelper.SerializeValue(je).Should().Be(json);
+        }
+
 
         [Fact]
         public void On_json_serialization_exception_should_return_null()

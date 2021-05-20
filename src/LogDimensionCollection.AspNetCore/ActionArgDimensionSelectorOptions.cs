@@ -18,6 +18,18 @@ namespace CcAcca.LogDimensionCollection.AspNetCore
         };
 
         /// <summary>
+        ///     Automatically collect arguments for MVC Controller Actions rather than having to decorate each
+        ///     controller / action individually with <see cref="CollectActionArgsAttribute" />
+        /// </summary>
+        /// <remarks>
+        ///     It is safe to enable auto collection AND decorate a controller / action with
+        ///     <see cref="CollectActionArgsAttribute" />. In fact it's quite normal. Decorate those controller / actions
+        ///     whose arguments you always want to collect. Then set this option to <c>true</c> for non-production
+        ///     environments
+        /// </remarks>
+        public bool AutoCollect { get; set; }
+
+        /// <summary>
         ///     The set of types to not collect as argument values
         /// </summary>
         /// <remarks>

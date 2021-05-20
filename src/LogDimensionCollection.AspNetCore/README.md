@@ -115,6 +115,19 @@ services.AddMvcActionDimensionCollection(options =>
 });
 ```
 
+### Change the default options for the `ActionArgDimensionSelector`
+
+```c#
+services.ConfigureActionArgDimensionSelector(options =>
+{
+   // action arguments whose type should not be collected
+   options.ExcludedArgTypes =
+      ActionArgDimensionSelectorOptions.DefaultExcludedArgTypes.Union(new[] { typeof(UserProfile) }).ToList();
+   // note: use with extreme caution and probably never for production workloads!
+   options.AutoCollect = true;
+});
+```
+
 ### Define your own selectors
 
 #### Example: extract metadata for an action
