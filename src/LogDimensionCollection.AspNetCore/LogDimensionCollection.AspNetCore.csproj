@@ -4,7 +4,7 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <AssemblyName>CcAcca.LogDimensionCollection.AspNetCore</AssemblyName>
     <RootNamespace>CcAcca.LogDimensionCollection.AspNetCore</RootNamespace>
-    <Version>1.2.0</Version>
+    <Version>1.2.1</Version>
     <Description>Collect dimensions from MVC Controller Actions in a log framework agnostic manner</Description>
     <PackageTags>Logging</PackageTags>
   </PropertyGroup>

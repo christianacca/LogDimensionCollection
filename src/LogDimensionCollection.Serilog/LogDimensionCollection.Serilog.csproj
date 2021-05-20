@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AssemblyName>CcAcca.LogDimensionCollection.Serilog</AssemblyName>
+    <RootNamespace>CcAcca.LogDimensionCollection.Serilog</RootNamespace>
+    <Version>1.0.0</Version>
+    <Description>Enrich Serilog log entries with collected log dimensions</Description>
+    <PackageTags>Serilog Logging</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LogDimensionCollection.AspNetCore\LogDimensionCollection.AspNetCore.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Serilog.Extensions.Hosting" Version="4.1.2" />
+  </ItemGroup>
+
+</Project>

@@ -8,6 +8,8 @@ Integrates with [CcAcca.LogDimensionCollection.AspNetCore](https://www.nuget.org
 
 ## Usage
 
+If not already done so, setup [Dimension collection](../LogDimensionCollection.AspNetCore/README.md), then:
+
 1. Install package
 
    ```cmd

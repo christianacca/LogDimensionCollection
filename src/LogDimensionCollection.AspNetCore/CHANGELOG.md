@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.1] - 2021-05-20
+
+### Fixes
+
+- `ServiceCollectionExtensions`: `AddActionDimensionCollector` should replace registration of existing service
+
 ## [1.2.0] - 2021-05-20
 
 ### Added
