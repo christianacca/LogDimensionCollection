@@ -14,9 +14,14 @@ namespace CcAcca.LogDimensionCollection.AspNetCore
     ///         <see cref="CollectActionArgsAttribute" /> or whose Controller class is decorated with this attribute
     ///     </para>
     ///     <para>
+    ///         Use <see cref="ServiceCollectionExtensions.ConfigureActionArgDimensionSelector" /> to change this default
+    ///         to collect arguments from every targeted controller (note: use with extreme caution and probably never
+    ///         for production workloads!)
+    ///     </para>
+    ///     <para>
     ///         If you want fine control over which controller action and their arguments to collect you should inherit from
-    ///         this
-    ///         class to customize the default implementation. Register your class using dependency injection framework using
+    ///         this class to customize the default implementation. Register your class using dependency injection
+    ///         framework using:
     ///         <list type="bullet">
     ///             <item><see cref="ServiceCollectionExtensions.AddMvcActionDimensionSelector{T}" /> or</item>
     ///             <item><see cref="ServiceCollectionExtensions.AddApiActionDimensionSelector{T}" /> or</item>
@@ -52,7 +57,7 @@ namespace CcAcca.LogDimensionCollection.AspNetCore
 
         protected virtual bool IncludeAction(ActionExecutingContext context)
         {
-            return context.Filters.OfType<CollectActionArgsAttribute>().Any();
+            return Options.AutoCollect || context.Filters.OfType<CollectActionArgsAttribute>().Any();
         }
 
         protected virtual bool IncludeArgument(KeyValuePair<string, object> argument,
