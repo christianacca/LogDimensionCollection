@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -40,7 +41,9 @@ namespace CcAcca.LogDimensionCollection.AspNetCore
         public static IServiceCollection AddActionDimensionCollector<T>(this IServiceCollection services)
             where T : class, IActionDimensionCollector
         {
-            return services.AddSingleton<IActionDimensionCollector, T>();
+            return services
+                .RemoveServiceTypes(typeof(IActionDimensionCollector))
+                .AddSingleton<IActionDimensionCollector, T>();
         }
 
         /// <summary>
@@ -150,6 +153,24 @@ namespace CcAcca.LogDimensionCollection.AspNetCore
             Action<ActionArgDimensionSelectorOptions> configure)
         {
             return services.Configure(configure);
+        }
+
+        private static IServiceCollection RemoveServiceTypes(this IServiceCollection services,
+            params Type[] implementationTypes)
+        {
+            if (implementationTypes == null) return services;
+
+            var matchingServices = implementationTypes
+                .SelectMany(t => services.Where(descriptor => descriptor.ServiceType == t))
+                .Where(service => service != null)
+                .ToList();
+
+            foreach (var service in matchingServices)
+            {
+                services.Remove(service);
+            }
+
+            return services;
         }
     }
 }
