@@ -5,7 +5,7 @@
     <AssemblyName>CcAcca.LogDimensionCollection.Serilog</AssemblyName>
     <RootNamespace>CcAcca.LogDimensionCollection.Serilog</RootNamespace>
     <Version>1.0.0</Version>
-    <Description>Enrich Serilog log entries with collected log dimensions</Description>
+    <Description>Enrich Serilog request logging with collected log dimensions</Description>
     <PackageTags>Serilog Logging</PackageTags>
   </PropertyGroup>
 

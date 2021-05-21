@@ -1,8 +1,8 @@
-# LogDimensionCollection.AppInsights
+# LogDimensionCollection.Serilog
 
 ## Overview
 
-Enrich Serilog log entries with collected log dimensions.
+Enrich Serilog request logging with collected log dimensions.
 
 Integrates with [CcAcca.LogDimensionCollection.AspNetCore](https://www.nuget.org/packages/CcAcca.LogDimensionCollection.AspNetCore/) which will collect dimensions
 

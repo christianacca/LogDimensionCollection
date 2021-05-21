@@ -6,6 +6,7 @@ Collect log dimensions from .Net Core applications
 
 * LogDimensionCollection.AspNetCore : Collect dimensions from MVC Controller Actions in a log framework agnostic manner ([README.md](./src/LogDimensionCollection.AspNetCore/README.md))
 * LogDimensionCollection.AppInsights : Enrich MS Application Insight telemetry with collected log dimensions ([README.md](./src/LogDimensionCollection.AppInsights/README.md))
+* LogDimensionCollection.Serilog : Enrich Serilog request logging with collected log dimensions ([README.md](./src/LogDimensionCollection.Serilog/README.md))
 
 ## Develop
 
