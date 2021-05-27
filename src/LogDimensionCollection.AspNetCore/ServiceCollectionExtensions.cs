@@ -14,9 +14,6 @@ namespace CcAcca.LogDimensionCollection.AspNetCore
         public static IServiceCollection AddMvcActionDimensionCollection(this IServiceCollection services,
             Action<MvcDimensionCollectionOptions> configure = null)
         {
-            // Add ASP.NET Core Options libraries - just in case our consumer hasn't (safe to call multiple times)
-            services.AddOptions();
-
             if (configure != null)
             {
                 services.Configure(configure);

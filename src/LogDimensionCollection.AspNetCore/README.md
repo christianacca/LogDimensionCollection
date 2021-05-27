@@ -113,6 +113,12 @@ services.AddMvcActionDimensionCollection(options =>
 
    // for list of all options see MvcDimensionCollectionOptions
 });
+
+// or if you've already registered the feature:
+services.Configure<MvcDimensionCollectionOptions>(options =>
+{
+   // set options
+});
 ```
 
 ### Change the default options for the `ActionArgDimensionSelector`

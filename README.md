@@ -24,9 +24,11 @@ To build and run tests you can use:
   * on the new branch, bump the version number in the project affected by the change; follow [semver](https://semver.org/):
     * [LogDimensionCollection.AspNetCore.csproj](src/LogDimensionCollection.AspNetCore/LogDimensionCollection.AspNetCore.csproj)
     * [LogDimensionCollection.AppInsights.csproj](src/LogDimensionCollection.AppInsights/LogDimensionCollection.AppInsights.csproj)
+    * [LogDimensionCollection.Serilog.csproj](src/LogDimensionCollection.AppInsights/LogDimensionCollection.Serilog.csproj)
   * update the change log in the project affected by the change:
     * [LogDimensionCollection.AspNetCore/CHANGELOG.md](./LogDimensionCollection.AspNetCore/CHANGELOG.md)
     * [LogDimensionCollection.AppInsights/CHANGELOG.md](./LogDimensionCollection.AppInsights/CHANGELOG.md)
+    * [LogDimensionCollection.Serilogs/CHANGELOG.md](./LogDimensionCollection.Serilog/CHANGELOG.md)
   * raise the PR (pull request) for code review & merge request to master branch.
   * PR will auto trigger a limited CI build (compile and test only)
   * approval of the PR will merge your branch code changes into the *master*
@@ -41,3 +43,4 @@ Notes:
 * PR completion to master will also publish the nuget package to the Nuget gallery:
     * [CcAcca.LogDimensionCollection.AspNetCore](https://www.nuget.org/packages/CcAcca.LogDimensionCollection.AspNetCore/)
     * [CcAcca.LogDimensionCollection.AppInsights](https://www.nuget.org/packages/CcAcca.LogDimensionCollection.AppInsights/)
+    * [CcAcca.LogDimensionCollection.Serilog](https://www.nuget.org/packages/CcAcca.LogDimensionCollection.Serilog/)

@@ -12,19 +12,16 @@ namespace CcAcca.LogDimensionCollection.AppInsights
         /// </summary>
         /// <remarks>
         ///     Assumes that another process has aggregated and added these dimensions as an entry
-        ///     in <see cref="HttpContext.Items" />
+        ///     in <see cref="HttpContext.Items" />. For example using the nuget package
+        ///     CcAcca.LogDimensionCollection.AspNetCore
         /// </remarks>
         public static IServiceCollection AddMvcActionDimensionTelemetryInitializer(this IServiceCollection services,
             Action<ActionDimensionTelemetryOptions> configure = null)
         {
-            // Add ASP.NET Core Options libraries - just in case our consumer hasn't (safe to call multiple times)
-            services.AddOptions();
-
             if (configure != null)
             {
                 services.Configure(configure);
             }
-
             return services.AddSingleton<ITelemetryInitializer, MvcActionDimensionTelemetryInitializer>();
         }
     }

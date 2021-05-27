@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.ApplicationInsights.AspNetCore.TelemetryInitializers;
 using Microsoft.ApplicationInsights.Channel;
 using Microsoft.ApplicationInsights.DataContracts;
@@ -29,9 +30,21 @@ namespace CcAcca.LogDimensionCollection.AppInsights
             {
                 foreach (var (key, value) in dimensions)
                 {
-                    requestTelemetry.Properties[key] = value;
+                    if (IsMetric(key) && double.TryParse(value, out var metricValue))
+                    {
+                        requestTelemetry.Metrics[key] = metricValue;
+                    }
+                    else
+                    {
+                        requestTelemetry.Properties[key] = value;
+                    }
                 }
             }
+        }
+
+        private bool IsMetric(string key)
+        {
+            return Options.CurrentValue.MetricKeys.Any(key.EndsWith);
         }
     }
 }
