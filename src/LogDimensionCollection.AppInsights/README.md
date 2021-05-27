@@ -21,3 +21,24 @@ If not already done so, setup [Dimension collection](../LogDimensionCollection.A
    ```c#
    services.AddMvcActionDimensionTelemetryInitializer();
    ```
+
+## Customize feature
+
+### Change the default options
+
+```c#
+services.AddMvcActionDimensionTelemetryInitializer(options =>
+{
+   // send specific values as metric measurements
+   var myMetrics = new[] { "SalesValue" };
+   options.MetricKeys = ActionDimensionTelemetryOptions.DefaultMetricKeys.Union(myMetrics).ToList();
+
+   // for list of all options see ActionDimensionTelemetryOptions
+});
+
+// or if you've already registered the feature:
+services.Configure<ActionDimensionTelemetryOptions>(options =>
+{
+   // set options
+});
+```
