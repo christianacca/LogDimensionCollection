@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.2] - 2021-05-27
+
+### Fixes
+
+- `ResultItemsCountDimensionSelector`: collections returned via `JsonResult` no longer ignored
+- `ResultItemsCountDimensionSelector`: a non-collection result should return a count of 1 for any non-empty response body
+
+
 ## [1.2.1] - 2021-05-20
 
 ### Fixes
