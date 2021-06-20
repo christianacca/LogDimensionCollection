@@ -23,9 +23,9 @@ namespace Specs.DefaultActionDimensionCollectorSpecs
             setup.PostConfigure("", options);
         }
 
-        public static IOptionsMonitor<MvcDimensionCollectionOptions> OptionsOf(MvcDimensionCollectionOptions options)
+        public static IOptionsMonitor<T> OptionsOf<T>(T options)
         {
-            var mock = new Mock<IOptionsMonitor<MvcDimensionCollectionOptions>>();
+            var mock = new Mock<IOptionsMonitor<T>>();
             mock.Setup(o => o.CurrentValue).Returns(options);
             return mock.Object;
         }
@@ -40,7 +40,8 @@ namespace Specs.DefaultActionDimensionCollectorSpecs
         public static DefaultActionDimensionCollector NewCollectorWith(MvcDimensionCollectionOptions options,
             DefaultHttpContext httpContext)
         {
-            return new DefaultActionDimensionCollector(OptionsOf(options), ContextAccessorFor(httpContext));
+            return new DefaultActionDimensionCollector(OptionsOf(options),
+                OptionsOf(new ActionArgDimensionSelectorOptions()), ContextAccessorFor(httpContext));
         }
     }
 }

@@ -10,8 +10,10 @@ namespace CcAcca.LogDimensionCollection.AspNetCore
     /// </summary>
     public class DefaultActionDimensionCollector : ActionDimensionCollector
     {
-        public DefaultActionDimensionCollector(IOptionsMonitor<MvcDimensionCollectionOptions> options,
-            IHttpContextAccessor httpContextAccessor) : base(options)
+        public DefaultActionDimensionCollector(
+            IOptionsMonitor<MvcDimensionCollectionOptions> options,
+            IOptionsMonitor<ActionArgDimensionSelectorOptions> argSelectorOptions,
+            IHttpContextAccessor httpContextAccessor) : base(options, argSelectorOptions)
         {
             HttpContextAccessor = httpContextAccessor;
         }

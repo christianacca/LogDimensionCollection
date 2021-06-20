@@ -7,8 +7,10 @@ namespace CcAcca.LogDimensionCollection.Serilog
 {
     internal class SerilogActionDimensionCollector : ActionDimensionCollector
     {
-        public SerilogActionDimensionCollector(IOptionsMonitor<MvcDimensionCollectionOptions> optionsMonitor,
-            IDiagnosticContext diagnosticContext) : base(optionsMonitor)
+        public SerilogActionDimensionCollector(
+            IOptionsMonitor<MvcDimensionCollectionOptions> options,
+            IOptionsMonitor<ActionArgDimensionSelectorOptions> argSelectorOptions,
+            IDiagnosticContext diagnosticContext) : base(options, argSelectorOptions)
         {
             DiagnosticContext = diagnosticContext;
         }

@@ -2,13 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.0.0] - 2021-06-20
+
+### Feat
+
+- `IActionDimensionCollector`: `AutoCollect` option exposed on interface
+
+### Breaking Changes
+
+- Additional constructor parameter added to `ActionDimensionCollector` which will require any custom subclasses to supply
+
 ## [1.2.2] - 2021-05-27
 
 ### Fixes
 
 - `ResultItemsCountDimensionSelector`: collections returned via `JsonResult` no longer ignored
 - `ResultItemsCountDimensionSelector`: a non-collection result should return a count of 1 for any non-empty response body
-
 
 ## [1.2.1] - 2021-05-20
 
