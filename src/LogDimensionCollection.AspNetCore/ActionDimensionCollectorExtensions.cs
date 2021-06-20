@@ -70,6 +70,20 @@ namespace CcAcca.LogDimensionCollection.AspNetCore
 
         /// <summary>
         ///     Execute the delegate <paramref name="collectionAction" /> only when
+        ///     <see cref="IActionDimensionCollector.Enabled" /> and <see cref="IActionDimensionCollector.AutoCollect" />
+        ///     is true
+        /// </summary>
+        public static void WhenAutoCollectEnabled(this IActionDimensionCollector source,
+            Action<IActionDimensionCollector> collectionAction)
+        {
+            if (source.Enabled && source.AutoCollect)
+            {
+                collectionAction(source);
+            }
+        }
+
+        /// <summary>
+        ///     Execute the delegate <paramref name="collectionAction" /> only when
         ///     <see cref="IActionDimensionCollector.Enabled" />
         ///     is true
         /// </summary>
@@ -83,17 +97,36 @@ namespace CcAcca.LogDimensionCollection.AspNetCore
 
         /// <summary>
         ///     Try and execute the delegate <paramref name="collectionAction" /> only when
+        ///     <see cref="IActionDimensionCollector.Enabled" />  and <see cref="IActionDimensionCollector.AutoCollect" />
+        ///     is true, returning false when the collection fails with an exception
+        /// </summary>
+        public static bool TryWhenAutoCollectEnabled(this IActionDimensionCollector source,
+            Action<IActionDimensionCollector> collectionAction)
+        {
+            try
+            {
+                source.WhenAutoCollectEnabled(collectionAction);
+                return true;
+            }
+            catch (Exception e)
+            {
+                // not sure where to log these failures; ideally we should write to some diagnostic trace source
+                Console.WriteLine($"Failed to collect dimensions; error: {e}");
+                return false;
+            }
+        }
+
+        /// <summary>
+        ///     Try and execute the delegate <paramref name="collectionAction" /> only when
         ///     <see cref="IActionDimensionCollector.Enabled" />
         ///     is true, returning false when the collection fails with an exception
         /// </summary>
         public static bool TryWhenEnabled(this IActionDimensionCollector source,
             Action<IActionDimensionCollector> collectionAction)
         {
-            if (!source.Enabled) return true;
-
             try
             {
-                collectionAction(source);
+                source.WhenEnabled(collectionAction);
                 return true;
             }
             catch (Exception e)

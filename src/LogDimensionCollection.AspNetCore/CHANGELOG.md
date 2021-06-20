@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 ### Feat
 
 - `IActionDimensionCollector`: `AutoCollect` option exposed on interface
+- `ActionDimensionCollectorExtensions`: new `WhenAutoCollectEnabled` and `TryWhenAutoCollectEnabled`
 
 ### Breaking Changes
 
