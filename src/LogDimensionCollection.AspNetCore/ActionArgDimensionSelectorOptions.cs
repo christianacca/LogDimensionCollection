@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using Microsoft.AspNetCore.Http;
 
 namespace CcAcca.LogDimensionCollection.AspNetCore
@@ -14,7 +15,8 @@ namespace CcAcca.LogDimensionCollection.AspNetCore
         /// </summary>
         public static IEnumerable<Type> DefaultExcludedArgTypes { get; } = new List<Type>
         {
-            typeof(IFormFile)
+            typeof(IFormFile),
+            typeof(CancellationToken)
         };
 
         /// <summary>

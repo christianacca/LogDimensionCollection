@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.0.1] - 2021-06-24
+
+### Fix
+
+- `ActionArgDimensionSelector`: don't try and collect `CancellationToken` arguments
+
 ## [2.0.0] - 2021-06-20
 
 ### Feat
