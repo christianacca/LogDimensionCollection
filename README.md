@@ -1,4 +1,4 @@
-# LogDimensionCollection [![Build Status](https://dev.azure.com/christianacca/LogDimensionCollection/_apis/build/status/christianacca.LogDimensionCollection?branchName=master)](https://dev.azure.com/christianacca/LogDimensionCollection/_build/latest?definitionId=7&branchName=master)
+# LogDimensionCollection ![Build Status](https://github.com/christianacca/LogDimensionCollection/actions/workflows/library-ci.yml/badge.svg)
 
 ## Overview
 
@@ -35,7 +35,7 @@ To build and run tests you can use:
 
 ## CI server
 
-[Azure Devops](https://dev.azure.com/christianacca/LogDimensionCollection) is used to run the dotnet cli tool to perform the build and test. See the [yaml build definition](azure-pipelines.yml) for details.
+[Github actions](https://github.com/christianacca/LogDimensionCollection/actions) is used to run the dotnet cli tool to perform the build and test. See the [yaml build definition](.github/workflows/library-ci.yml) for details.
 
 Notes:
 
