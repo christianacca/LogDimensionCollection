@@ -95,6 +95,18 @@ namespace Specs.DimensionsCollectionHelperSpecs
         }
 
         [Fact]
+        public void Custom_object_value_with_null_prop_value()
+        {
+            var value = new CustomObject
+            {
+                Prop1 = null,
+                Prop2 = 2
+            };
+            const string expected = "{\"Prop2\":2}";
+            DimensionsCollectionHelper.SerializeValue(value).Should().Be(expected);
+        }
+
+        [Fact]
         public void Problem_Details_With_Extensions()
         {
             var value = new ProblemDetails

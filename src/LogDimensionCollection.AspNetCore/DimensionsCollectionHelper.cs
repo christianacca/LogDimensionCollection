@@ -13,7 +13,7 @@ namespace CcAcca.LogDimensionCollection.AspNetCore
         private static JsonSerializerOptions SerializerOptions { get; } = new()
         {
             // Minimize the bytes sent to a log sink
-            IgnoreNullValues = true
+            DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull
         };
 
         private static JsonSerializerSettings NewtonsoftSerializerOptions { get; } = new()
