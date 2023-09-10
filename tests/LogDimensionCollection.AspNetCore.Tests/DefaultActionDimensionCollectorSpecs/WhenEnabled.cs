@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using CcAcca.LogDimensionCollection.AspNetCore;
 using FluentAssertions;
 using Microsoft.AspNetCore.Http;
@@ -16,14 +15,14 @@ namespace Specs.DefaultActionDimensionCollectorSpecs
             var sut = Fixture.NewCollectorWith(options, context);
 
             // when
-            var dimensions = new Dictionary<string, object>
+            var dimensions = new Dictionary<string, object?>
             {
                 ["InterestingKey"] = "123"
             };
             sut.WhenEnabled(x => x.CollectDimensions(dimensions));
 
             // then
-            var expected = new Dictionary<string, object>(dimensions);
+            var expected = new Dictionary<string, object?>(dimensions);
             context.Items[options.AggregatedDimensionsKey].Should().BeEquivalentTo(expected);
         }
 
@@ -36,14 +35,14 @@ namespace Specs.DefaultActionDimensionCollectorSpecs
             var sut = Fixture.NewCollectorWith(options, context);
 
             // when
-            var dimensions = new Dictionary<string, object>
+            var dimensions = new Dictionary<string, object?>
             {
                 ["InterestingKey"] = "123"
             };
             sut.WhenEnabled(x => x.CollectDimensions(dimensions));
 
             // then
-            var expected = new Dictionary<string, object>(dimensions);
+            var expected = new Dictionary<string, object?>(dimensions);
             context.Items.Should().BeEmpty();
         }
     }

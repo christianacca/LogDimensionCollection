@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
 using Microsoft.ApplicationInsights.AspNetCore.TelemetryInitializers;
 using Microsoft.ApplicationInsights.Channel;
 using Microsoft.ApplicationInsights.DataContracts;
@@ -21,23 +19,19 @@ namespace CcAcca.LogDimensionCollection.AppInsights
         protected override void OnInitializeTelemetry(HttpContext platformContext, RequestTelemetry requestTelemetry,
             ITelemetry telemetry)
         {
-            if (platformContext.Request == null) return;
-
             var options = Options.CurrentValue;
-            var httpContext = platformContext.Request.HttpContext;
-            var hasEntries = httpContext.Items.TryGetValue(options.HttpContextItemKey, out var entries);
-            if (hasEntries && entries is Dictionary<string, string> dimensions)
+            var hasEntries = platformContext.Items.TryGetValue(options.HttpContextItemKey, out var entries);
+            if (!hasEntries || entries is not Dictionary<string, string?> dimensions) return;
+
+            foreach (var (key, value) in dimensions)
             {
-                foreach (var (key, value) in dimensions)
+                if (IsMetric(key) && double.TryParse(value, out var metricValue))
                 {
-                    if (IsMetric(key) && double.TryParse(value, out var metricValue))
-                    {
-                        requestTelemetry.Metrics[key] = metricValue;
-                    }
-                    else
-                    {
-                        requestTelemetry.Properties[key] = value;
-                    }
+                    requestTelemetry.Metrics[key] = metricValue;
+                }
+                else
+                {
+                    requestTelemetry.Properties[key] = value;
                 }
             }
         }

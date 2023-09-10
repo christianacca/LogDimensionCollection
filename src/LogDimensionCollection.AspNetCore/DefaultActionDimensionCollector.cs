@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 
@@ -20,15 +19,16 @@ namespace CcAcca.LogDimensionCollection.AspNetCore
 
         private IHttpContextAccessor HttpContextAccessor { get; }
 
-        protected override void DoCollectDimensions(IEnumerable<KeyValuePair<string, object>> dimensions,
-            string dimensionPrefix)
+        protected override void DoCollectDimensions(IEnumerable<KeyValuePair<string, object?>> dimensions,
+            string? dimensionPrefix)
         {
             var storeKey = Options.AggregatedDimensionsKey;
-            var storageItems = HttpContextAccessor.HttpContext.Items;
+            var storageItems = HttpContextAccessor.HttpContext?.Items;
+            if (storageItems == null) return;
 
             var existingDimensions =
-                (storageItems.ContainsKey(storeKey) ? storageItems[storeKey] as Dictionary<string, string> : null) ??
-                new Dictionary<string, string>();
+                (storageItems.TryGetValue(storeKey, out var item) ? item as Dictionary<string, string?> : null) ??
+                new Dictionary<string, string?>();
             existingDimensions.SetDimensions(dimensions, dimensionPrefix, Options.SerializeValue);
             if (existingDimensions.Count > 0)
             {

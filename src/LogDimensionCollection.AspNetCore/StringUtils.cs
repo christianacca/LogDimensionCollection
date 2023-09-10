@@ -2,7 +2,7 @@ namespace CcAcca.LogDimensionCollection.AspNetCore
 {
     internal static class StringUtils
     {
-        public static string PascalCase(string s)
+        public static string PascalCase(string? s)
         {
             if (string.IsNullOrWhiteSpace(s))
             {

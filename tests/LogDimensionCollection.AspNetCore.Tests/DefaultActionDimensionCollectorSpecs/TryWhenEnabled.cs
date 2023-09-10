@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using CcAcca.LogDimensionCollection.AspNetCore;
 using FluentAssertions;
 using Microsoft.AspNetCore.Http;
@@ -16,7 +15,7 @@ namespace Specs.DefaultActionDimensionCollectorSpecs
             var sut = Fixture.NewCollectorWith(options, context);
 
             // when
-            var dimensions = new Dictionary<string, object>
+            var dimensions = new Dictionary<string, object?>
             {
                 ["InterestingKey"] = "123"
             };
@@ -39,7 +38,7 @@ namespace Specs.DefaultActionDimensionCollectorSpecs
             var sut = Fixture.NewCollectorWith(options, context);
 
             // when
-            var dimensions = new Dictionary<string, object>
+            var dimensions = new Dictionary<string, object?>
             {
                 ["InterestingKey"] = "123"
             };
@@ -63,7 +62,7 @@ namespace Specs.DefaultActionDimensionCollectorSpecs
             var sut = Fixture.NewCollectorWith(options, context);
 
             // when
-            var dimensions = new Dictionary<string, object>
+            var dimensions = new Dictionary<string, object?>
             {
                 ["InterestingKey"] = "123"
             };

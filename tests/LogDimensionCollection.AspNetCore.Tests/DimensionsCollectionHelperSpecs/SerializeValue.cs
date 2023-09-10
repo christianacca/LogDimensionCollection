@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using CcAcca.LogDimensionCollection.AspNetCore;
 using FluentAssertions;
@@ -198,21 +196,21 @@ namespace Specs.DimensionsCollectionHelperSpecs
 
         public class CustomObject
         {
-            public string Prop1 { get; set; }
+            public string? Prop1 { get; set; }
             public int Prop2 { get; set; }
         }
 
         public class CustomProblemDetails : ProblemDetails
         {
-            public string Prop1 { get; set; }
+            public string? Prop1 { get; set; }
             public int Prop2 { get; set; }
         }
 
         public class CircularCustomObject
         {
-            public string Prop1 { get; set; }
+            public string? Prop1 { get; set; }
 
-            public CircularCustomObject Self { get; set; }
+            public CircularCustomObject? Self { get; set; }
         }
 
         public struct CustomStruct

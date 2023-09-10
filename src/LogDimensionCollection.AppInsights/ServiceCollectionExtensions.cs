@@ -1,4 +1,3 @@
-using System;
 using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,7 +15,7 @@ namespace CcAcca.LogDimensionCollection.AppInsights
         ///     CcAcca.LogDimensionCollection.AspNetCore
         /// </remarks>
         public static IServiceCollection AddMvcActionDimensionTelemetryInitializer(this IServiceCollection services,
-            Action<ActionDimensionTelemetryOptions> configure = null)
+            Action<ActionDimensionTelemetryOptions>? configure = null)
         {
             if (configure != null)
             {
