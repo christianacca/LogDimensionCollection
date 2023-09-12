@@ -12,7 +12,7 @@ Collect dimensions from MVC Controller Actions in a log framework agnostic manne
    Install-Package CcAcca.LogDimensionCollection.AspNetCore
    ```
 
-2. Register feature in `Startup.cs`
+2. Register feature in `Startup.cs` / `Program.cs`
 
    ```c#
    services.AddMvcActionDimensionCollection();
@@ -142,9 +142,9 @@ services.ConfigureActionArgDimensionSelector(options =>
 // ActionMetadataSelector.cs:
 public class ActionMetadataSelector: ControllerDimensionSelector
 {
-   public override IDictionary<string, object> GetActionExecutingDimensions(ActionExecutingContext context)
+   public override IDictionary<string, object?>? GetActionExecutingDimensions(ActionExecutingContext context)
    {
-      return new Dictionary<string, object>
+      return new Dictionary<string, object?>
       {
          ["RouteData"] = context.ActionDescriptor.RouteValues,
          ["ActionName"] = context.ActionDescriptor.DisplayName,
@@ -175,11 +175,11 @@ public class ResultItemsJsonDimensionSelector : ControllerDimensionSelector
       Options = options;
    }
 
-   public override IDictionary<string, object> GetActionResultDimensions(ResultExecutedContext context)
+   public override IDictionary<string, object?>? GetActionResultDimensions(ResultExecutedContext context)
    {
       if (context.Result is not ObjectResult { Value: ICollection collection }) return null;
 
-      return new Dictionary<string, object>
+      return new Dictionary<string, object?>
       {
          { "Json", Options.CurrentValue.SerializeValue(collection) }
       };
@@ -206,7 +206,7 @@ public class CustomActionDimensionCollector : ActionDimensionCollector
     {
     }
 
-    protected override void DoCollectDimensions(IEnumerable<KeyValuePair<string, object>>, string dimensionPrefix)
+    protected override void DoCollectDimensions(IEnumerable<KeyValuePair<string, object?>>, string? dimensionPrefix)
     {
         foreach (var (key, value) in dimensions.HasKey().PrefixKey(dimensionPrefix))
         {

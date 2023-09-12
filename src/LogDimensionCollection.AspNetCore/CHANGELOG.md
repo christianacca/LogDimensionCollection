@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.0.0-beta.1] - 2023-10-11
+
+### Added
+
+- Support for nullable reference types
+- `DimensionsCollectionHelper`: `SerializeValue` supports `DateOnly` and `TimeOnly`
+
+### Breaking Changes
+
+- Upgraded Newtonsoft.Json dependency to 13.0.1
+- Dropped support for .NET Core 3.1; minimum supported .NET version is now .NET 6.0
+- Signature of collected dimensions changed from `Dictionary<string, object>` to `Dictionary<string, object?>`
+- Signature of serialized dimensions changed from `Dictionary<string, string>` to `Dictionary<string, string?>`
+
 ## [2.0.1] - 2021-06-24
 
 ### Fix

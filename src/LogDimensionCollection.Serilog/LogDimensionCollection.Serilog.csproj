@@ -4,7 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <AssemblyName>CcAcca.LogDimensionCollection.Serilog</AssemblyName>
     <RootNamespace>CcAcca.LogDimensionCollection.Serilog</RootNamespace>
-    <Version>1.0.1</Version>
+    <Version>2.0.0-beta.1</Version>
     <Description>Enrich Serilog request logging with collected log dimensions</Description>
     <PackageTags>Serilog Logging</PackageTags>
   </PropertyGroup>
