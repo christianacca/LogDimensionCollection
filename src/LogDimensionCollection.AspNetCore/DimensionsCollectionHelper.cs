@@ -108,6 +108,8 @@ namespace CcAcca.LogDimensionCollection.AspNetCore
                 int _ => value.ToString(),
                 DateTime dtm => dtm.ToString("O"),
                 DateTimeOffset dtm2 => dtm2.ToString("O"),
+                DateOnly d => d.ToString("O"),
+                TimeOnly t => t.ToString("O"),
                 _ => IsNewtonsoftType(value) ? TryNewtonsoftSerializeAsJson(value) : TrySerializeAsJson(value)
             };
         }

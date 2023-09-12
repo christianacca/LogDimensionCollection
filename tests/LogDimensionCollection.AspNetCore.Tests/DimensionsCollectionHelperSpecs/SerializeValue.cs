@@ -67,6 +67,19 @@ namespace Specs.DimensionsCollectionHelperSpecs
             DimensionsCollectionHelper.SerializeValue(dtm).Should().Be("1999-12-31T23:59:59.0000000+00:00");
         }
 
+        [Fact]
+        public void DateOnly_value()
+        {
+            var d = new DateOnly(2023, 09, 12);
+            DimensionsCollectionHelper.SerializeValue(d).Should().Be("2023-09-12");
+        }
+
+        [Fact]
+        public void TimeOnly_value()
+        {
+            var t = new TimeOnly(14, 04, 12);
+            DimensionsCollectionHelper.SerializeValue(t).Should().Be("14:04:12.0000000");
+        }
 
         [Fact]
         public void Dictionary_value()
