@@ -4,9 +4,10 @@
     <TargetFramework>net6.0</TargetFramework>
     <AssemblyName>CcAcca.LogDimensionCollection.AspNetCore</AssemblyName>
     <RootNamespace>CcAcca.LogDimensionCollection.AspNetCore</RootNamespace>
-    <Version>3.0.0-beta.1</Version>
+    <Version>3.0.0-beta.2</Version>
     <Description>Collect dimensions from MVC Controller Actions in a log framework agnostic manner</Description>
     <PackageTags>Logging</PackageTags>
+    <PackageReleaseNotes>See: https://github.com/christianacca/LogDimensionCollection/blob/master/src/LogDimensionCollection.AspNetCore/CHANGELOG.md</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

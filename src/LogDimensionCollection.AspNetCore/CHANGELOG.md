@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+
+## [3.0.0-beta.2] - 2023-10-12
+
+### Fixed
+
+- Package metadata include readme and release notes. No code changes
+
 ## [3.0.0-beta.1] - 2023-10-11
 
 ### Added

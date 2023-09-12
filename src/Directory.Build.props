@@ -4,6 +4,7 @@
     <Owners>christianacca</Owners>
     <RepositoryUrl>https://github.com/christianacca/LogDimensionCollection</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageProjectUrl>https://github.com/christianacca/LogDimensionCollection</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageIconUrl>https://www.gravatar.com/avatar/c1fc9a95deec0da0a3dc0fac34bddfec.png</PackageIconUrl>
@@ -16,6 +17,13 @@
 <!--    <IncludeSymbols>true</IncludeSymbols>-->
 <!--    <SymbolPackageFormat>snupkg</SymbolPackageFormat>-->
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
 <!--
   <ItemGroup>
