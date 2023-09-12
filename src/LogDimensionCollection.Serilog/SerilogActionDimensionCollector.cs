@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using CcAcca.LogDimensionCollection.AspNetCore;
+﻿using CcAcca.LogDimensionCollection.AspNetCore;
 using Microsoft.Extensions.Options;
 using Serilog;
 
@@ -17,8 +16,8 @@ namespace CcAcca.LogDimensionCollection.Serilog
 
         private IDiagnosticContext DiagnosticContext { get; }
 
-        protected override void DoCollectDimensions(IEnumerable<KeyValuePair<string, object>> dimensions,
-            string dimensionPrefix)
+        protected override void DoCollectDimensions(IEnumerable<KeyValuePair<string, object?>> dimensions,
+            string? dimensionPrefix)
         {
             foreach (var (key, value) in dimensions.HasKey().PrefixKey(dimensionPrefix))
             {

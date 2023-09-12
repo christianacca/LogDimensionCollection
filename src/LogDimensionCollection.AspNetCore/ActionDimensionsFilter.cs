@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
 using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace CcAcca.LogDimensionCollection.AspNetCore
@@ -31,7 +29,10 @@ namespace CcAcca.LogDimensionCollection.AspNetCore
             DimensionSelectors.ForEach(selector =>
             {
                 DimensionCollector.TryWhenEnabled(c =>
-                    c.CollectActionDimensions(selector.GetActionExecutingDimensions(context)));
+                {
+                    var dimensions = selector.GetActionExecutingDimensions(context);
+                    if (dimensions != null) c.CollectActionDimensions(dimensions);
+                });
             });
         }
     }

@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -17,12 +16,12 @@ namespace CcAcca.LogDimensionCollection.AspNetCore
     /// </remarks>
     public class ResultItemsCountDimensionSelector : ControllerDimensionSelector
     {
-        public override IDictionary<string, object> GetActionResultDimensions(ResultExecutedContext context)
+        public override IDictionary<string, object?>? GetActionResultDimensions(ResultExecutedContext context)
         {
             var itemsCount = GetItemsCount(context);
             if (itemsCount == null) return null;
 
-            return new Dictionary<string, object>
+            return new Dictionary<string, object?>
             {
                 ["ItemsCount"] = itemsCount
             };
@@ -34,7 +33,7 @@ namespace CcAcca.LogDimensionCollection.AspNetCore
             {
                 ObjectResult objectResult => (objectResult.Value as ICollection)?.Count ?? 1,
                 JsonResult jsonResult => (jsonResult.Value as ICollection)?.Count ?? 1,
-                _ => HttpMethods.IsGet(context.HttpContext?.Request?.Method) ? 0 : null
+                _ => HttpMethods.IsGet(context.HttpContext.Request.Method) ? 0 : null
             };
         }
     }

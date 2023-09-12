@@ -16,7 +16,7 @@ If not already done so, setup [Dimension collection](../LogDimensionCollection.A
    Install-Package CcAcca.LogDimensionCollection.AppInsights
    ```
 
-2. Register feature in `Startup.cs`
+2. Register feature in `Startup.cs` / `Program.cs`
 
    ```c#
    services.AddMvcActionDimensionTelemetryInitializer();

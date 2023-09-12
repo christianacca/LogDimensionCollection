@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.0.0-beta.1] - 2023-10-11
+
+### Added
+
+- Support for nullable reference types
+
+### Breaking Changes
+
+- Upgraded Microsoft.ApplicationInsights.AspNetCore dependency to 2.21.0
+- Dropped support for .NET Core 3.1; minimum supported .NET version is now .NET 6.0
+- Expected signature of serialized dimensions changed from `Dictionary<string, string>` to `Dictionary<string, string?>`
+  - note: typically this means your app needs to be using `CcAcca.LogDimensionCollection.AspNetCore` package 3.0.0-beta.1 or later
+
 ## [2.0.0] - 2021-05-27
 
 ### Added

@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text.Json;
 using Newtonsoft.Json;
 using JsonException = System.Text.Json.JsonException;
@@ -13,7 +10,7 @@ namespace CcAcca.LogDimensionCollection.AspNetCore
         private static JsonSerializerOptions SerializerOptions { get; } = new()
         {
             // Minimize the bytes sent to a log sink
-            IgnoreNullValues = true
+            DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull
         };
 
         private static JsonSerializerSettings NewtonsoftSerializerOptions { get; } = new()
@@ -33,10 +30,10 @@ namespace CcAcca.LogDimensionCollection.AspNetCore
         ///     Delegate that will be used to serialize dimension values (defaults to
         ///     <see cref="SerializeValue" />
         /// </param>
-        public static void SetDimensions(this IDictionary<string, string> source,
-            IEnumerable<KeyValuePair<string, object>> items,
-            string dimensionPrefix = null,
-            Func<object, string> serializer = null)
+        public static void SetDimensions(this IDictionary<string, string?> source,
+            IEnumerable<KeyValuePair<string, object?>>? items,
+            string? dimensionPrefix = null,
+            Func<object?, string?>? serializer = null)
         {
             if (source == null) throw new ArgumentNullException(nameof(source));
 
@@ -61,8 +58,8 @@ namespace CcAcca.LogDimensionCollection.AspNetCore
         /// <summary>
         ///     Return only those dimension entries that have a value other than whitespace
         /// </summary>
-        public static IEnumerable<KeyValuePair<string, object>> HasKey(
-            this IEnumerable<KeyValuePair<string, object>> source)
+        public static IEnumerable<KeyValuePair<string, object?>> HasKey(
+            this IEnumerable<KeyValuePair<string, object?>> source)
         {
             return source.Where(d => !string.IsNullOrWhiteSpace(d.Key));
         }
@@ -70,8 +67,8 @@ namespace CcAcca.LogDimensionCollection.AspNetCore
         /// <summary>
         ///     Prefix the key of each dimension with the <paramref name="dimensionPrefix" /> supplied
         /// </summary>
-        public static IEnumerable<KeyValuePair<string, object>> PrefixKey(
-            this IEnumerable<KeyValuePair<string, object>> source, string dimensionPrefix)
+        public static IEnumerable<KeyValuePair<string, object?>> PrefixKey(
+            this IEnumerable<KeyValuePair<string, object?>> source, string? dimensionPrefix)
         {
             dimensionPrefix = StringUtils.PascalCase(dimensionPrefix);
             return source.Select(d =>
@@ -81,17 +78,17 @@ namespace CcAcca.LogDimensionCollection.AspNetCore
                 var key = string.IsNullOrEmpty(dimensionPrefix) || rawKey.StartsWith(dimensionPrefix)
                     ? dimensionKey
                     : $"{dimensionPrefix}{dimensionKey}";
-                return new KeyValuePair<string, object>(key, value);
+                return new KeyValuePair<string, object?>(key, value);
             });
         }
 
         /// <summary>
         ///     Serialize dimension values
         /// </summary>
-        public static IEnumerable<KeyValuePair<string, string>> SerializeDimension(
-            this IEnumerable<KeyValuePair<string, object>> source, Func<object, string> serializer)
+        public static IEnumerable<KeyValuePair<string, string?>> SerializeDimension(
+            this IEnumerable<KeyValuePair<string, object?>> source, Func<object?, string?> serializer)
         {
-            return source.Select(x => new KeyValuePair<string, string>(x.Key, serializer(x.Value)));
+            return source.Select(x => new KeyValuePair<string, string?>(x.Key, serializer(x.Value)));
         }
 
         /// <summary>
@@ -102,7 +99,7 @@ namespace CcAcca.LogDimensionCollection.AspNetCore
         ///     method and for all other types to try and serialize
         ///     the object as a JSON string
         /// </remarks>
-        public static string SerializeValue(object value)
+        public static string? SerializeValue(object? value)
         {
             return value switch
             {
@@ -111,16 +108,18 @@ namespace CcAcca.LogDimensionCollection.AspNetCore
                 int _ => value.ToString(),
                 DateTime dtm => dtm.ToString("O"),
                 DateTimeOffset dtm2 => dtm2.ToString("O"),
+                DateOnly d => d.ToString("O"),
+                TimeOnly t => t.ToString("O"),
                 _ => IsNewtonsoftType(value) ? TryNewtonsoftSerializeAsJson(value) : TrySerializeAsJson(value)
             };
         }
 
-        private static bool IsNewtonsoftType(object value)
+        private static bool IsNewtonsoftType(object? value)
         {
             return value != null && value.GetType().Namespace?.StartsWith("Newtonsoft.Json") == true;
         }
 
-        private static string TryNewtonsoftSerializeAsJson(object value)
+        private static string? TryNewtonsoftSerializeAsJson(object value)
         {
             try
             {
@@ -132,7 +131,7 @@ namespace CcAcca.LogDimensionCollection.AspNetCore
             }
         }
 
-        private static string TrySerializeAsJson(object value)
+        private static string? TrySerializeAsJson(object value)
         {
             try
             {

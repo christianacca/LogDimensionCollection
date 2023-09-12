@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace CcAcca.LogDimensionCollection.AspNetCore
@@ -8,12 +7,12 @@ namespace CcAcca.LogDimensionCollection.AspNetCore
     /// </summary>
     public class ControllerDimensionSelector : IControllerDimensionSelector
     {
-        public virtual IDictionary<string, object> GetActionResultDimensions(ResultExecutedContext context)
+        public virtual IDictionary<string, object?>? GetActionResultDimensions(ResultExecutedContext context)
         {
             return null;
         }
 
-        public virtual IDictionary<string, object> GetActionExecutingDimensions(ActionExecutingContext context)
+        public virtual IDictionary<string, object?>? GetActionExecutingDimensions(ActionExecutingContext context)
         {
             return null;
         }
@@ -41,7 +40,7 @@ namespace CcAcca.LogDimensionCollection.AspNetCore
         ///     </para>
         /// </remarks>
         /// <param name="context">The result context for a specific invocation of a controller action</param>
-        IDictionary<string, object> GetActionResultDimensions(ResultExecutedContext context);
+        IDictionary<string, object?>? GetActionResultDimensions(ResultExecutedContext context);
 
         /// <summary>
         ///     Return a dictionary of dimensions extracted from the controller action execution <paramref name="context" />
@@ -60,7 +59,7 @@ namespace CcAcca.LogDimensionCollection.AspNetCore
         ///     </para>
         /// </remarks>
         /// <param name="context">The action existing context for a specific invocation of a controller action</param>
-        IDictionary<string, object> GetActionExecutingDimensions(ActionExecutingContext context);
+        IDictionary<string, object?>? GetActionExecutingDimensions(ActionExecutingContext context);
     }
 
     /// <summary>

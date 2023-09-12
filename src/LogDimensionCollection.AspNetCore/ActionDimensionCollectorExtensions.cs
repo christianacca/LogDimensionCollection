@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-
 namespace CcAcca.LogDimensionCollection.AspNetCore
 {
     /// <summary>
@@ -43,7 +40,7 @@ namespace CcAcca.LogDimensionCollection.AspNetCore
         ///     to prefix each dimension key
         /// </summary>
         public static void CollectActionArgDimensions(
-            this IActionDimensionCollector source, IDictionary<string, object> dimensions)
+            this IActionDimensionCollector source, IDictionary<string, object?> dimensions)
         {
             source.CollectDimensions(dimensions, source.ActionArgDimensionPrefix);
         }
@@ -53,7 +50,7 @@ namespace CcAcca.LogDimensionCollection.AspNetCore
         ///     to prefix each dimension key
         /// </summary>
         public static void CollectActionDimensions(
-            this IActionDimensionCollector source, IDictionary<string, object> dimensions)
+            this IActionDimensionCollector source, IDictionary<string, object?> dimensions)
         {
             source.CollectDimensions(dimensions, source.ActionDimensionPrefix);
         }
@@ -63,7 +60,7 @@ namespace CcAcca.LogDimensionCollection.AspNetCore
         ///     to prefix each dimension key
         /// </summary>
         public static void CollectActionResultDimensions(
-            this IActionDimensionCollector source, IDictionary<string, object> dimensions)
+            this IActionDimensionCollector source, IDictionary<string, object?> dimensions)
         {
             source.CollectDimensions(dimensions, source.ActionResultDimensionPrefix);
         }

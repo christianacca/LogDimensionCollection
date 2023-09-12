@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Options;
 
@@ -45,7 +43,7 @@ namespace CcAcca.LogDimensionCollection.AspNetCore
         private IOptionsMonitor<MvcDimensionCollectionOptions> LibraryOptionsMonitor { get; }
         private IOptionsMonitor<ActionArgDimensionSelectorOptions> OptionsMonitor { get; }
 
-        public override IDictionary<string, object> GetActionExecutingDimensions(ActionExecutingContext context)
+        public override IDictionary<string, object?>? GetActionExecutingDimensions(ActionExecutingContext context)
         {
             if (!IncludeAction(context)) return null;
 
@@ -60,7 +58,7 @@ namespace CcAcca.LogDimensionCollection.AspNetCore
             return Options.AutoCollect || context.Filters.OfType<CollectActionArgsAttribute>().Any();
         }
 
-        protected virtual bool IncludeArgument(KeyValuePair<string, object> argument,
+        protected virtual bool IncludeArgument(KeyValuePair<string, object?> argument,
             ActionExecutingContext actionExecutingContext)
         {
             if (argument.Value == null) return false;

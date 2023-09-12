@@ -21,7 +21,7 @@ Then:
    Install-Package CcAcca.LogDimensionCollection.Serilog
    ```
 
-2. Register feature in `Startup.cs`
+2. Register feature in `Startup.cs` / `Program.cs`
 
    ```c#
    services.AddSerilogActionDimensionCollector();

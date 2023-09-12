@@ -1,5 +1,3 @@
-using System;
-using System.Linq;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -12,7 +10,7 @@ namespace CcAcca.LogDimensionCollection.AspNetCore
         ///     Register the MVC action dimension collection feature with the dependency injection framework
         /// </summary>
         public static IServiceCollection AddMvcActionDimensionCollection(this IServiceCollection services,
-            Action<MvcDimensionCollectionOptions> configure = null)
+            Action<MvcDimensionCollectionOptions>? configure = null)
         {
             if (configure != null)
             {

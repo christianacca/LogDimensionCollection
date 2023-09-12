@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using CcAcca.LogDimensionCollection.AspNetCore;
 using FluentAssertions;
@@ -69,6 +67,19 @@ namespace Specs.DimensionsCollectionHelperSpecs
             DimensionsCollectionHelper.SerializeValue(dtm).Should().Be("1999-12-31T23:59:59.0000000+00:00");
         }
 
+        [Fact]
+        public void DateOnly_value()
+        {
+            var d = new DateOnly(2023, 09, 12);
+            DimensionsCollectionHelper.SerializeValue(d).Should().Be("2023-09-12");
+        }
+
+        [Fact]
+        public void TimeOnly_value()
+        {
+            var t = new TimeOnly(14, 04, 12);
+            DimensionsCollectionHelper.SerializeValue(t).Should().Be("14:04:12.0000000");
+        }
 
         [Fact]
         public void Dictionary_value()
@@ -91,6 +102,18 @@ namespace Specs.DimensionsCollectionHelperSpecs
                 Prop2 = 2
             };
             const string expected = "{\"Prop1\":\"one\",\"Prop2\":2}";
+            DimensionsCollectionHelper.SerializeValue(value).Should().Be(expected);
+        }
+
+        [Fact]
+        public void Custom_object_value_with_null_prop_value()
+        {
+            var value = new CustomObject
+            {
+                Prop1 = null,
+                Prop2 = 2
+            };
+            const string expected = "{\"Prop2\":2}";
             DimensionsCollectionHelper.SerializeValue(value).Should().Be(expected);
         }
 
@@ -186,21 +209,21 @@ namespace Specs.DimensionsCollectionHelperSpecs
 
         public class CustomObject
         {
-            public string Prop1 { get; set; }
+            public string? Prop1 { get; set; }
             public int Prop2 { get; set; }
         }
 
         public class CustomProblemDetails : ProblemDetails
         {
-            public string Prop1 { get; set; }
+            public string? Prop1 { get; set; }
             public int Prop2 { get; set; }
         }
 
         public class CircularCustomObject
         {
-            public string Prop1 { get; set; }
+            public string? Prop1 { get; set; }
 
-            public CircularCustomObject Self { get; set; }
+            public CircularCustomObject? Self { get; set; }
         }
 
         public struct CustomStruct

@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using CcAcca.LogDimensionCollection.AspNetCore;
 using FluentAssertions;
 using Microsoft.AspNetCore.Http;
@@ -18,14 +17,14 @@ namespace Specs.DefaultActionDimensionCollectorSpecs
 
             // when
             var anon = new { Prop1 = "Value1", Prop2 = 10 };
-            var dimensions = new Dictionary<string, object>
+            var dimensions = new Dictionary<string, object?>
             {
                 ["InterestingKey"] = anon
             };
             sut.CollectActionDimensions(dimensions);
 
             // then
-            var expected = new Dictionary<string, string>
+            var expected = new Dictionary<string, string?>
             {
                 [$"{options.ActionDimensionPrefix}InterestingKey"] = options.SerializeValue(anon)
             };
@@ -41,7 +40,7 @@ namespace Specs.DefaultActionDimensionCollectorSpecs
             var sut = Fixture.NewCollectorWith(options, context);
 
             // when
-            sut.CollectActionDimensions(null);
+            sut.CollectActionDimensions(null!);
 
             // then
             context.Items.Should().NotContainKey(options.AggregatedDimensionsKey);
@@ -56,7 +55,7 @@ namespace Specs.DefaultActionDimensionCollectorSpecs
             var sut = Fixture.NewCollectorWith(options, context);
 
             // when
-            var dimensions = new Dictionary<string, object>
+            var dimensions = new Dictionary<string, object?>
             {
                 [""] = 123
             };
@@ -80,7 +79,7 @@ namespace Specs.DefaultActionDimensionCollectorSpecs
             var sut = Fixture.NewCollectorWith(options, context);
 
             // when
-            var dimensions = new Dictionary<string, object>
+            var dimensions = new Dictionary<string, object?>
             {
                 ["InterestingKey"] = "345"
             };
@@ -110,7 +109,7 @@ namespace Specs.DefaultActionDimensionCollectorSpecs
             var sut = Fixture.NewCollectorWith(customOptions, context);
 
             // when
-            var dimensions = new Dictionary<string, object>
+            var dimensions = new Dictionary<string, object?>
             {
                 ["InterestingKey"] = "345"
             };
@@ -138,7 +137,7 @@ namespace Specs.DefaultActionDimensionCollectorSpecs
             var sut = Fixture.NewCollectorWith(customOptions, context);
 
             // when
-            var dimensions = new Dictionary<string, object>
+            var dimensions = new Dictionary<string, object?>
             {
                 ["InterestingKey"] = "345"
             };
@@ -166,14 +165,14 @@ namespace Specs.DefaultActionDimensionCollectorSpecs
             var sut = Fixture.NewCollectorWith(customOptions, context);
 
             // when
-            var dimensions = new Dictionary<string, object>
+            var dimensions = new Dictionary<string, object?>
             {
                 ["InterestingKey"] = "345"
             };
             sut.CollectActionArgDimensions(dimensions);
 
             // then
-            var expected = new Dictionary<string, object>(dimensions);
+            var expected = new Dictionary<string, object?>(dimensions);
             var actual = context.Items[customOptions.AggregatedDimensionsKey];
             actual.Should().BeEquivalentTo(expected);
         }
@@ -192,7 +191,7 @@ namespace Specs.DefaultActionDimensionCollectorSpecs
             var sut = Fixture.NewCollectorWith(options, context);
 
             // when
-            sut.CollectActionArgDimensions(null);
+            sut.CollectActionArgDimensions(null!);
 
             // then
             var expected = new Dictionary<string, string>(existingDimensions);

@@ -1,4 +1,3 @@
-using System;
 using Microsoft.AspNetCore.Http;
 
 namespace CcAcca.LogDimensionCollection.AspNetCore
@@ -9,19 +8,19 @@ namespace CcAcca.LogDimensionCollection.AspNetCore
         ///     The general prefix value added to a dimension key that will classify/group dimensions
         ///     as being generated from a MVC Controller action
         /// </summary>
-        public string ActionDimensionPrefix { get; set; }
+        public string ActionDimensionPrefix { get; set; } = null!;
 
         /// <summary>
         ///     The prefix value added to a dimension key that will classify/group dimensions
         ///     as being generated from an argument value supplied to an MVC Controller action
         /// </summary>
-        public string ActionArgDimensionPrefix { get; set; }
+        public string ActionArgDimensionPrefix { get; set; } = null!;
 
         /// <summary>
         ///     The prefix value added to a dimension key that will classify/group dimensions
         ///     as being generated from the result returned from an MVC Controller action
         /// </summary>
-        public string ActionResultDimensionPrefix { get; set; }
+        public string ActionResultDimensionPrefix { get; set; } = null!;
 
         /// <summary>
         ///     Whether collection is enabled or no
@@ -35,7 +34,7 @@ namespace CcAcca.LogDimensionCollection.AspNetCore
         ///     <see cref="DefaultActionDimensionCollector" /> uses this to identify existing dimensions already added to
         ///     <see cref="HttpContext.Items" />
         /// </remarks>
-        public string AggregatedDimensionsKey { get; set; }
+        public string AggregatedDimensionsKey { get; set; } = null!;
 
         /// <summary>
         ///     Gets or sets the function for serializing an dimension values
@@ -51,6 +50,6 @@ namespace CcAcca.LogDimensionCollection.AspNetCore
         ///         may not
         ///     </para>
         /// </remarks>
-        public Func<object, string> SerializeValue { get; set; }
+        public Func<object?, string?> SerializeValue { get; set; } = null!;
     }
 }

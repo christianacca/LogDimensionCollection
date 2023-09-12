@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Microsoft.Extensions.Options;
 
 namespace CcAcca.LogDimensionCollection.AspNetCore
@@ -57,12 +56,12 @@ namespace CcAcca.LogDimensionCollection.AspNetCore
         /// <summary>
         ///     Collect dimension, adding an optional <paramref name="dimensionPrefix" /> to the dimension key
         /// </summary>
-        void CollectDimension(string key, object value, string dimensionPrefix = null);
+        void CollectDimension(string key, object? value, string? dimensionPrefix = null);
 
         /// <summary>
         ///     Collect dimensions, adding an optional <paramref name="dimensionPrefix" /> to each dimension key
         /// </summary>
-        void CollectDimensions(IDictionary<string, object> dimensions, string dimensionPrefix = null);
+        void CollectDimensions(IDictionary<string, object?> dimensions, string? dimensionPrefix = null);
     }
 
     /// <summary>
@@ -91,23 +90,24 @@ namespace CcAcca.LogDimensionCollection.AspNetCore
 
         public bool Enabled => Options.Enabled;
 
-        public void CollectDimensions(IDictionary<string, object> dimensions, string dimensionPrefix = null)
+        public void CollectDimensions(IDictionary<string, object?> dimensions, string? dimensionPrefix = null)
         {
+            // ReSharper disable once ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
             if (dimensions == null || dimensions.Count == 0) return;
 
             DoCollectDimensions(dimensions, dimensionPrefix);
         }
 
-        public void CollectDimension(string key, object value, string dimensionPrefix = null)
+        public void CollectDimension(string key, object? value, string? dimensionPrefix = null)
         {
             var dimension = new[]
             {
-                new KeyValuePair<string, object>(key, value)
+                new KeyValuePair<string, object?>(key, value)
             };
             DoCollectDimensions(dimension, dimensionPrefix);
         }
 
-        protected abstract void DoCollectDimensions(IEnumerable<KeyValuePair<string, object>> dimensions,
-            string dimensionPrefix);
+        protected abstract void DoCollectDimensions(IEnumerable<KeyValuePair<string, object?>> dimensions,
+            string? dimensionPrefix);
     }
 }
